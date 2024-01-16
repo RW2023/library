@@ -68,10 +68,10 @@ const Navbar = () => {
               {' '}
               {/* Logo Image */}
               <Image
-                src={'/img/logo.png'}
-                alt="Run Book Logo"
-                width="60"
-                height="60"
+                src={'/logo.webp'}
+                alt="Library Logo"
+                width="80"
+                height="80"
                 className="rounded-full border-2 border-button"
               />
               {/* SubHeading */}
