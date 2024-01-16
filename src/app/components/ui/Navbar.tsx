@@ -72,10 +72,10 @@ const Navbar = () => {
                 alt="Library Logo"
                 width="80"
                 height="80"
-                className="rounded-full border-2 border-button"
+                className="rounded-full border-2 border-button mr-2"
               />
               {/* SubHeading */}
-              <SubHeading title="Run Book 2024" iconClass="fas fa-person" />
+              <SubHeading title="Library" />
             </div>
           </span>
         </Link>
@@ -128,12 +128,12 @@ const Navbar = () => {
         } w-full lg:flex lg:items-center lg:w-auto lg:justify-end`}
       >
         <div className="text-sm lg:flex-grow">
-          <Link href="/devdash">
+          <Link href="/search">
             <span
               onClick={closeNavbar}
               className="block mt-4 lg:inline-block lg:mt-0 text-strokeLight text-xl  hover:underline mr-4 cursor-pointer"
             >
-              <i className="fas fa-cogs mr-2"></i>Dashboard{' '}
+              <i className="mr-2 fas fa-search"></i>Search{' '}
             </span>
           </Link>
           <Link href="/about">
@@ -141,7 +141,7 @@ const Navbar = () => {
               onClick={closeNavbar}
               className="block mt-4 lg:inline-block lg:mt-0 text-strokeLight text-xl  hover:underline mr-4 cursor-pointer"
             >
-              <i className="fas fa-info mr-2"></i>About Run Book
+              <i className="fas fa-info mr-2"></i>About
             </span>
           </Link>
           <Link href="/feedback">
