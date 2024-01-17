@@ -8,9 +8,9 @@ interface Props {}
 const page: FC<Props> = (): JSX.Element => {
   return (
     <div>
-     <Heading title='DevDash' />
-      <AddBookForm />
+      <Heading title="DevDash" />
       <BooksList />
+      <AddBookForm />
     </div>
   );
 };
