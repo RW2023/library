@@ -53,7 +53,7 @@ const BooksList: React.FC = () => {
               <div className="card-body text-center p-3">
                 <SubHeading title={`Title: ${book.title}`} />
                 <div className="border border-1 bg-base-200 rounded p-2">
-                  <p className="font-bold text-headline">
+                  <p className="font-bold">
                     Author: {book.author}
                   </p>
                   <p>Genre: {book.genre}</p>
