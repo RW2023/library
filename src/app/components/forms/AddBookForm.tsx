@@ -60,6 +60,17 @@ const handleSubmit = async (e: FormEvent) => {
   setIsError(false); // Reset error state
   setMessage(''); // Clear previous messages
 
+  // Validation: Check if required fields are filled
+  if (
+    !formData.title.trim() ||
+    !formData.author.trim() ||
+    !formData.isbn.trim()
+  ) {
+    setMessage('Please fill in all required fields.');
+    setIsError(true);
+    return; // Stop the form submission
+  }
+
   try {
     const { data, error } = isUpdateMode
       ? await supabase.from('books').update(formData).eq('id', formData.id)
