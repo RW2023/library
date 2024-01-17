@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import LightHeading from '@/app/components/ui/LightSubHeading';
 import LightSubHeading from '@/app/components/ui/LightSubHeading';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -22,10 +23,16 @@ export default function Home() {
                   '1px 1px 0px #000, -1px -1px 0px #000, 1px -1px 0px #000, -1px 1px 0px #000',
               }}
             >
-            Enter the Library
+              Enter the Library
             </h1>
 
-            <button className="btn btn-primary">Get Started</button>
+            <Link
+            href="/library"
+            >
+              <button type="button" className="btn btn-primary">
+                Get Started
+              </button>
+            </Link>
           </div>
         </div>
       </div>
