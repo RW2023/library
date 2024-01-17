@@ -40,22 +40,22 @@ const BooksList: React.FC = () => {
 
   if (isLoading) return <LoadingInline />;
   return (
-    <div className="container mx-auto p-4 bg-base-200 m-2 rounded ">
+    <div className="container mx-auto p-4 bg-base-200 m-5 rounded md mt-2 ">
       <div className="form-control">
         {/* Assuming you have a form component here */}
         {/* <YourFormComponent /> */}
       </div>
       <div className="divider"></div> {/* Divider line between form and list */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 border border-1 rounded-md bg-base-200 m-1">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4  rounded-md bg-base-200">
         {books.length > 0 ? (
           books.map((book) => (
-            <div key={book.id} className="card-compact bg-base-300 shadow-xl">
+            <div key={book.id} className="card-compact bg-base-300 shadow-xl border border-1">
               <div className="card-bod text-center p-3">
                 <SubHeading title={` Title: ${book.title}`} />
                 <div className="border border-1 bg-base-200 rounded">
                   <p className='font-bold text-headline'>Author: {book.author}</p>
                   <p>Genre: {book.genre}</p>
-                  <p className='text-green-500'>{book.format}</p>
+                  <p className='text-success'>{book.format}</p>
                 </div>
           <SubHeading title='description' />
           <p>{book.description}</p>
