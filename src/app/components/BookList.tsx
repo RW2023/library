@@ -1,7 +1,9 @@
 // components/BooksList.tsx
-'use client'
+'use client';
+// Assuming you have a file that exports an initialized Supabase client
 import React, { useState, useEffect } from 'react';
-import Loading from '@/app/components/ui/Loading';
+import Loading from '@/app/components/ui/Loading'; 
+import { supabase } from '@/utils/supabaseClient';
 
 // Define a type for the book
 type Book = {
@@ -12,27 +14,20 @@ type Book = {
 
 const BooksList: React.FC = () => {
   const [books, setBooks] = useState<Book[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchBooks = async () => {
-      setIsLoading(true);
-      setError(null);
-
       try {
-        const response = await fetch('/api/books'); // Replace with your actual API endpoint
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const data = await response.json();
-        setBooks(data);
+        const { data, error } = await supabase
+          .from('books')
+          .select('*');
+
+        if (error) throw error;
+
+        setBooks(data || []);
       } catch (error) {
-        if (error instanceof Error) {
-          setError(error.message);
-        } else {
-          setError('An unknown error occurred');
-        }
+        console.error('Error fetching books:', error);
       } finally {
         setIsLoading(false);
       }
@@ -41,13 +36,11 @@ const BooksList: React.FC = () => {
     fetchBooks();
   }, []);
 
-  if (isLoading) return<Loading />; // Or use your custom <Loading /> component here
-  if (error) return <div>Error: {error}</div>;
-
+  if (isLoading) return <Loading />;
   return (
     <div>
       {books.length > 0 ? (
-        books.map((book: Book) => (
+        books.map((book) => (
           <div key={book.id}>
             <h3>{book.title}</h3>
             <p>{book.author}</p>
