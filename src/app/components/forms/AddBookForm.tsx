@@ -92,6 +92,15 @@ const handleSubmit = async (e: FormEvent) => {
 
   return (
     <div className="card bg-base-300 shadow-xl p-4 w-3/4 mx-auto border border-1 rounded-md">
+      {/* Toggle Button for Add/Update Mode */}
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-xl font-semibold">
+          {isUpdateMode ? 'Update Book' : 'Add Book'}
+        </h2>
+        <button onClick={handleModeToggle} className="btn btn-outline">
+          {isUpdateMode ? 'Switch to Add Mode' : 'Switch to Update Mode'}
+        </button>
+      </div>
       {/* Feedback message */}
       {message && (
         <div
