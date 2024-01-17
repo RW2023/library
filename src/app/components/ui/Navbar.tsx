@@ -7,6 +7,8 @@ import SubHeading from './SubHeading';
 // import DarkModeToggle from './DarkModeToggle';
 import { motion, useAnimation } from 'framer-motion';
 import Image from 'next/image';
+import DarkModeToggle from '@/app/components/ui/DarkModeToggle';
+import { on } from 'events';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -79,6 +81,7 @@ const Navbar = () => {
             </div>
           </span>
         </Link>
+        
       </div>
       <div className="block lg:hidden">
         <motion.button
@@ -160,7 +163,14 @@ const Navbar = () => {
               <i className="fas fa-envelope mr-2"></i>Contact
             </span>
           </Link>
-          {/* <DarkModeToggle /> */}
+            <Link
+              href="/devdash"
+              onClick={closeNavbar}
+              className="block mt-4 lg:inline-block lg:mt-0 text-strokeLight text-xl hover:underline cursor-pointer mr-2"
+            >
+              DevDash
+            </Link>
+          <DarkModeToggle />
         </div>
       </div>
     </motion.nav>
