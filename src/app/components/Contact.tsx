@@ -1,6 +1,6 @@
 'use client';
 import { FC } from 'react';
-import SubHeading from '@/components/ui/SubHeading';
+import SubHeading from './ui/SubHeading';
 
 interface Props {}
 
