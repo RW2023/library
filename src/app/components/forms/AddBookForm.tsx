@@ -102,7 +102,7 @@ const handleSubmit = async (e: FormEvent) => {
 };
 
   return (
-    <div className="card bg-base-300 shadow-xl p-4 w-3/4 mx-auto border border-1 rounded-md">
+    <div className="card bg-base-300 shadow-xl p-4 w-3/4 mx-auto border border-1 rounded-md mb-3">
       {/* Toggle Button for Add/Update Mode */}
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-semibold">
