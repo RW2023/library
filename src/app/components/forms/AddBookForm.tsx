@@ -1,4 +1,4 @@
-//src/app/components/forms/AddBookForm.tsx
+// components/AddBookForm.tsx
 'use client';
 import React, { useState, FormEvent } from 'react';
 import { supabase } from '@/utils/supabaseClient'; // Ensure this is the correct path
@@ -27,8 +27,8 @@ const AddBookForm: React.FC = () => {
     description: '',
   });
   const [isUpdateMode, setIsUpdateMode] = useState<boolean>(false);
-  const [message, setMessage] = useState<string>(''); // State for the message
-  const [isError, setIsError] = useState<boolean>(false); // State for the error status
+  const [message, setMessage] = useState<string>('');
+  const [isError, setIsError] = useState<boolean>(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -36,14 +36,15 @@ const AddBookForm: React.FC = () => {
     setFormData({
       ...formData,
       [e.target.name]:
-        e.target.type === 'number' ? parseInt(e.target.value) : e.target.value,
+        e.target.type === 'number'
+          ? parseInt(e.target.value) || undefined
+          : e.target.value,
     });
   };
 
   const handleModeToggle = () => {
     setIsUpdateMode(!isUpdateMode);
     setFormData({
-      // Reset form data when mode changes
       title: '',
       author: '',
       isbn: '',
@@ -55,55 +56,56 @@ const AddBookForm: React.FC = () => {
     });
   };
 
-const handleSubmit = async (e: FormEvent) => {
-  e.preventDefault();
-  setIsError(false); // Reset error state
-  setMessage(''); // Clear previous messages
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setIsError(false);
+    setMessage('');
 
-  // Validation: Check if required fields are filled
-  if (
-    !formData.title.trim() ||
-    !formData.author.trim() ||
-    !formData.isbn.trim()
-  ) {
-    setMessage('Please fill in all required fields.');
-    setIsError(true);
-    return; // Stop the form submission
-  }
-
-  try {
-    const { data, error } = isUpdateMode
-      ? await supabase.from('books').update(formData).eq('id', formData.id)
-      : await supabase.from('books').insert([formData]);
-
-    if (error) throw error;
-
-    setMessage(
-      isUpdateMode ? 'Book updated successfully!' : 'Book added successfully!',
-    );
-    setFormData({
-      title: '',
-      author: '',
-      isbn: '',
-      format: '',
-      genre: '',
-      published_year: undefined,
-      cover_image_url: '',
-      description: '',
-    });
-  } catch (error) {
-    setIsError(true);
-    if (error instanceof Error) {
-      setMessage('Error submitting book data: ' + error.message);
-    } else {
-      setMessage('An unknown error occurred');
+    // Validation: Check if required fields are filled
+    if (
+      !formData.title.trim() ||
+      !formData.author.trim() ||
+      !formData.isbn.trim()
+    ) {
+      setMessage('Please fill in all required fields.');
+      setIsError(true);
+      return;
     }
-  }
-};
+
+    try {
+      const { data, error } = isUpdateMode
+        ? await supabase.from('books').update(formData).eq('id', formData.id)
+        : await supabase.from('books').insert([formData]);
+
+      if (error) throw error;
+
+      setMessage(
+        isUpdateMode
+          ? 'Book updated successfully!'
+          : 'Book added successfully!',
+      );
+      setFormData({
+        title: '',
+        author: '',
+        isbn: '',
+        format: '',
+        genre: '',
+        published_year: undefined,
+        cover_image_url: '',
+        description: '',
+      });
+    } catch (error) {
+      setIsError(true);
+      if (error instanceof Error) {
+        setMessage('Error submitting book data: ' + error.message);
+      } else {
+        setMessage('An unknown error occurred');
+      }
+    }
+  };
 
   return (
-    <div className="card bg-base-300 shadow-xl p-4 w-3/4 mx-auto border border-1 rounded-md mb-3">
-      {/* Toggle Button for Add/Update Mode */}
+    <div className="card bg-base-300 shadow-xl p-4 w-3/4 mx-auto border border-1 rounded-md">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-semibold">
           {isUpdateMode ? 'Update Book' : 'Add Book'}
@@ -112,7 +114,6 @@ const handleSubmit = async (e: FormEvent) => {
           {isUpdateMode ? 'Switch to Add Mode' : 'Switch to Update Mode'}
         </button>
       </div>
-      {/* Feedback message */}
       {message && (
         <div
           className={`p-3 my-2 text-sm ${
