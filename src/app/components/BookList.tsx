@@ -2,8 +2,8 @@
 'use client';
 // Assuming you have a file that exports an initialized Supabase client
 import React, { useState, useEffect } from 'react';
-import Loading from '@/app/components/ui/Loading'; 
 import { supabase } from '@/utils/supabaseClient';
+import LoadingInline from '@/app/components/ui/LoadingInline';
 
 // Define a type for the book
 type Book = {
@@ -36,7 +36,7 @@ const BooksList: React.FC = () => {
     fetchBooks();
   }, []);
 
-  if (isLoading) return <Loading />;
+  if (isLoading) return <LoadingInline/>;
   return (
     <div>
       {books.length > 0 ? (
