@@ -45,15 +45,18 @@ const BooksList: React.FC = () => {
         {/* <YourFormComponent /> */}
       </div>
       <div className="divider"></div> {/* Divider line between form and list */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 border border-1 rounded-md bg-base-200">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 border border-1 rounded-md bg-base-200 m-1">
         {books.length > 0 ? (
           books.map((book) => (
-            <div key={book.id} className="card bg-base-300 shadow-xl">
-              <div className="card-body">
+            <div key={book.id} className="card-compact bg-base-300 shadow-xl">
+              <div className="card-bod text-center p-3">
                 <SubHeading title={` Title: ${book.title}`} />
-                <p>Author: {book.author}</p>
-                <p>Genre: {book.genre}</p>
-                <p>Description: {book.description}</p>
+                <div className="border border-1 bg-base-200">
+                  <p>Author: {book.author}</p>
+                  <p>Genre: {book.genre}</p>
+                </div>
+          <SubHeading title='description' />
+          <p>{book.description}</p>
                 {/* You can add more book details here */}
               </div>
             </div>
