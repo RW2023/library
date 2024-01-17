@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import BooksList from '../components/BookList';
-import Heading from '../components/ui/LightHeading';
+import Heading from '../components/ui/Heading';
 
 interface Props {}
 
