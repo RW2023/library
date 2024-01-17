@@ -1,5 +1,5 @@
 // components/AddBookForm.tsx
-
+'use client'
 import React, { useState, FormEvent } from 'react';
 
 // Define a type for the book form data
