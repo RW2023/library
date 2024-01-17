@@ -13,6 +13,7 @@ type Book = {
   author: string;
   genre: string;
   description: string;
+  format: string;
 };
 
 const BooksList: React.FC = () => {
@@ -51,9 +52,10 @@ const BooksList: React.FC = () => {
             <div key={book.id} className="card-compact bg-base-300 shadow-xl">
               <div className="card-bod text-center p-3">
                 <SubHeading title={` Title: ${book.title}`} />
-                <div className="border border-1 bg-base-200">
-                  <p>Author: {book.author}</p>
+                <div className="border border-1 bg-base-200 rounded">
+                  <p className='font-bold text-headline'>Author: {book.author}</p>
                   <p>Genre: {book.genre}</p>
+                  <p className='text-green-500'>{book.format}</p>
                 </div>
           <SubHeading title='description' />
           <p>{book.description}</p>
