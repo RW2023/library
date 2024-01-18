@@ -30,7 +30,7 @@ export default function Home() {
             href="/library"
             >
               <button type="button" className="btn btn-primary">
-                Get Started
+                Explore Titles 📚
               </button>
             </Link>
           </div>
