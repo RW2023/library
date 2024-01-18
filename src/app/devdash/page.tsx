@@ -9,8 +9,8 @@ const page: FC<Props> = (): JSX.Element => {
   return (
     <div>
       <Heading title="DevDash" />
-      <BooksList />
       <AddBookForm />
+       <BooksList />
     </div>
   );
 };
