@@ -69,7 +69,7 @@ const Navbar = () => {
             <div className="flex items-center">
               {' '}
               {/* Logo Image */}
-              <Image
+              <img
                 src={'/logo.webp'}
                 alt="Library Logo"
                 width="80"
