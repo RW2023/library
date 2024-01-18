@@ -92,7 +92,7 @@ const BooksList: React.FC = () => {
         <input
           type="text"
           placeholder="Search books..."
-          className="input input-bordered w-full"
+          className="input input-bordered input-primary w-full"
           onChange={handleSearchChange}
         />
       </div>
