@@ -20,6 +20,7 @@ const BooksList: React.FC = () => {
   const [books, setBooks] = useState<Book[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [aiLoading, setAiLoading] = useState<boolean>(false);
+  const [searchQuery, setSearchQuery] = useState<string>('');
   const [similarTitles, setSimilarTitles] = useState<{
     [key: number]: string[];
   }>({});
@@ -72,13 +73,32 @@ const BooksList: React.FC = () => {
     });
   }, [books]);
 
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value.toLowerCase());
+  };
+
+  const filteredBooks = books.filter(
+    (book) =>
+      book.title.toLowerCase().includes(searchQuery) ||
+      book.author.toLowerCase().includes(searchQuery) ||
+      book.genre.toLowerCase().includes(searchQuery),
+  );
+
   if (isLoading) return <Loading />;
 
   return (
     <div className="container mx-auto p-4 bg-base-200 m-5 rounded mt-2">
+      <div className="mb-4">
+        <input
+          type="text"
+          placeholder="Search books..."
+          className="input input-bordered w-full"
+          onChange={handleSearchChange}
+        />
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {books.length > 0 ? (
-          books.map((book) => (
+        {filteredBooks.length > 0 ? (
+          filteredBooks.map((book) => (
             <div
               key={book.id}
               className="card card-compact bg-base-300 shadow-xl border"
@@ -96,7 +116,7 @@ const BooksList: React.FC = () => {
                   <p>{book.description}</p>
                 </div>
                 <div className="bg-base-100 rounded p-2 my-2 border border-1 mb-3">
-                  <div className='border border-1'>
+                  <div className="border border-1">
                     <SubHeading title="Similar Titles" />
                   </div>
                   {aiLoading ? (
