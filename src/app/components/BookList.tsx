@@ -41,37 +41,37 @@ const BooksList: React.FC = () => {
     fetchBooks();
   }, []);
 
-  const fetchSimilarTitles = async (bookId: number, title: string) => {
-    if (similarTitles[bookId]) return; // Skip if already fetched
-
-    setAiLoading(true);
-    try {
-      const response = await fetch('/api/openai', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          message: `Return up to 3 books similar to ${title}? Include the title and author only`,
-        }),
-      });
-      const data = await response.json();
-      setSimilarTitles((prev) => ({
-        ...prev,
-        [bookId]: data.reply.split(', '),
-      }));
-    } catch (error) {
-      console.error('Error fetching similar titles:', error);
-    } finally {
-      setAiLoading(false);
-    }
-  };
-
   useEffect(() => {
+    const fetchSimilarTitles = async (bookId: number, title: string) => {
+      if (similarTitles[bookId]) return; // Skip if already fetched
+
+      setAiLoading(true);
+      try {
+        const response = await fetch('/api/openai', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            message: `Return up to 3 books similar to ${title}? Include the title and author only`,
+          }),
+        });
+        const data = await response.json();
+        setSimilarTitles((prev) => ({
+          ...prev,
+          [bookId]: data.reply.split(', '),
+        }));
+      } catch (error) {
+        console.error('Error fetching similar titles:', error);
+      } finally {
+        setAiLoading(false);
+      }
+    };
+
     books.forEach((book) => {
       fetchSimilarTitles(book.id, book.title);
     });
-  }, [books]);
+  }, [books]); // Removed fetchSimilarTitles from the dependencies
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value.toLowerCase());
